@@ -1,0 +1,28 @@
+.question {
+  .question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .question-title {
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-weight: bold;
+    }
+  }
+}
+
+.answer-title {
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.answers {
+  .answer {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #DEE2E6;
+  }
+}

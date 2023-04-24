@@ -1,0 +1,176 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../fonts/Montserrat-Regular.ttf");
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn {
+  border: 1px solid #838c95;
+  cursor: pointer;
+  padding: 8px 20px;
+  font-family: Montserrat, sans-serif;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: rgba(131, 140, 149, 0.04);
+}
+
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  background: antiquewhite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loader {
+    width: 160px;
+    height: 160px;
+    position: relative;
+    margin: 20px 20px 20px 100px;
+
+    div {
+      position: absolute;
+      background: #2d50a7;
+      width: 16px;
+      height: 44px;
+      border-radius: 8px;
+    }
+    .loader-line1 {
+      top: 0;
+      left: 72px;
+      animation: 0.8s linear infinite line1;
+    }
+    .loader-line2 {
+      top: 16px;
+      right: 32px;
+      transform: rotate(45deg);
+      animation: 0.8s linear infinite line2;
+    }
+    .loader-line3 {
+      top: 58px;
+      right: 16px;
+      transform: rotate(90deg);
+      animation: 0.8s linear infinite line3;
+    }
+    .loader-line4 {
+      bottom: 16px;
+      right: 32px;
+      transform: rotate(135deg);
+      animation: 0.8s linear infinite line4;
+    }
+    .loader-line5 {
+      bottom: 0;
+      right: 72px;
+      animation: 0.8s linear infinite line5;
+    }
+    .loader-line6 {
+      bottom: 17px;
+      left: 32px;
+      transform: rotate(45deg);
+      animation: 0.8s linear infinite line6;
+    }
+    .loader-line7 {
+      top: 58px;
+      left: 16px;
+      transform: rotate(90deg);
+      animation: 0.8s linear infinite line7;
+    }
+    .loader-line8 {
+      top: 16px;
+      left: 32px;
+      transform: rotate(135deg);
+      animation: 0.8s linear infinite line8;
+    }
+
+    @keyframes line1 {
+      0%, 12.5%, 100% {
+        background: #c4d9fd;
+      }
+      12.5% {
+        background: #2d50a7;
+      }
+    }
+
+    @keyframes line2 {
+      0%, 12.5%, 100% {
+        background: #c4d9fd;
+      }
+      25% {
+        background: #2d50a7;
+      }
+    }
+
+    @keyframes line3 {
+      0%, 12.5%, 100% {
+        background: #c4d9fd;
+      }
+      37.5% {
+        background: #2d50a7;
+      }
+    }
+
+    @keyframes line4 {
+      0%, 12.5%, 100% {
+        background: #c4d9fd;
+      }
+      50% {
+        background: #2d50a7;
+      }
+    }
+
+    @keyframes line5 {
+      0%, 12.5%, 100% {
+        background: #c4d9fd;
+      }
+      62.5% {
+        background: #2d50a7;
+      }
+    }
+
+    @keyframes line6 {
+      0%, 12.5%, 100% {
+        background: #c4d9fd;
+      }
+      75% {
+        background: #2d50a7;
+      }
+    }
+
+    @keyframes line7 {
+      0%, 12.5%, 100% {
+        background: #c4d9fd;
+      }
+      87.5% {
+        background: #2d50a7;
+      }
+    }
+
+    @keyframes line8 {
+      0%, 12.5%, 100% {
+        background: #c4d9fd;
+      }
+      100% {
+        background: #2d50a7;
+      }
+    }
+
+  }
+}
+

@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="result-search" >
+    <div class="result-search-header">
+      <div class="result-search-title" *ngIf="lenQuestions">
+        Результаты поиска "{{searchTitle}}" <span>({{lenQuestions}})</span>
+      </div>
+      <div class="result-search-title" *ngIf="listQuestions">Ничего не найдено :(</div>
+      <div class="catalog-sorting" *ngIf="lenQuestions" [class.open]="sortingOpen" (click)="toggleSorting(sorting.sortingMain)">
+
+        <div class="catalog-sorting-head">
+          <span>Сортировать</span>
+          <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M10.0003 14.5C9.41693 14.5 8.83359 14.275 8.39193 13.8334L2.95859 8.40003C2.71693 8.15837 2.71693 7.75837 2.95859 7.5167C3.20026 7.27503 3.60026 7.27503 3.84193 7.5167L9.27526 12.95C9.67526 13.35 10.3253 13.35 10.7253 12.95L16.1586 7.5167C16.4003 7.27503 16.8003 7.27503 17.0419 7.5167C17.2836 7.75837 17.2836 8.15837 17.0419 8.40003L11.6086 13.8334C11.1669 14.275 10.5836 14.5 10.0003 14.5Z"
+              fill="#2C2C2C"/>
+          </svg>
+        </div>
+        <div class="catalog-sorting-body">
+          <div class="catalog-sorting-item"
+               [class.active]="this.activeParams.sort ? this.activeParams.sort === sortingOption.value : false"
+               (click)="sort(sortingOption.value, null, sorting.sortingMain)"
+               *ngFor="let sortingOption of sortingOptions">{{sortingOption.name}}</div>
+          <div class="catalog-sorting-item"
+               [class.active]="this.activeParams.order ? this.activeParams.order === orderOption.value : false"
+               (click)="sort(null, orderOption.value, sorting.sortingMain)"
+               *ngFor="let orderOption of orderOptions">{{orderOption.name}}</div>
+        </div>
+
+      </div>
+      <button class="btn" (click)="backSearch()">Вернуться к поиску</button>
+    </div>
+  </div>
+  <div class="result-search-table" *ngIf="lenQuestions">
+    <table>
+      <tr>
+        <th class="table-title">Автор вопроса</th>
+        <th class="table-title">Тема</th>
+        <th class="table-title">Количество ответов</th>
+        <th class="table-title">Теги</th>
+      </tr>
+      <tr *ngFor="let question of questions">
+        <td class="table-title"><a
+          (click)="showDisplay(question.owner.user_id, question.owner.display_name, null)">{{question.owner.display_name}}</a>
+        </td>
+        <td class="table-title"><a (click)="questionTheme(question.question_id)">{{question.title}}</a></td>
+        <td class="table-title"><a (click)="questionTheme(question.question_id)">{{question.answer_count}}</a></td>
+        <td class="table-title tags">
+            <span class="tag" *ngFor="let tag of question.tags"
+                  (click)="showDisplay(null, null, tag)"><a>{{tag}}</a></span>
+        </td>
+      </tr>
+    </table>
+    <div class="display" *ngIf="display">
+      <div class="display-header">
+        <div class="display-title" *ngIf="author">Популярные вопросы автора {{author}}</div>
+        <div class="display-title" *ngIf="tag">Популярные вопросы по тегу {{tag}}</div>
+        <div class="catalog-sorting" *ngIf="author"  [class.open]="sortingDisplayOpen" (click)="toggleSorting(sorting.sortingDisplay)">
+
+          <div class="catalog-sorting-head">
+            <span>Сортировать</span>
+            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10.0003 14.5C9.41693 14.5 8.83359 14.275 8.39193 13.8334L2.95859 8.40003C2.71693 8.15837 2.71693 7.75837 2.95859 7.5167C3.20026 7.27503 3.60026 7.27503 3.84193 7.5167L9.27526 12.95C9.67526 13.35 10.3253 13.35 10.7253 12.95L16.1586 7.5167C16.4003 7.27503 16.8003 7.27503 17.0419 7.5167C17.2836 7.75837 17.2836 8.15837 17.0419 8.40003L11.6086 13.8334C11.1669 14.275 10.5836 14.5 10.0003 14.5Z"
+                fill="#2C2C2C"/>
+            </svg>
+          </div>
+          <div class="catalog-sorting-body">
+            <div class="catalog-sorting-item"
+                 [class.active]="this.activeParamsUserQuestion.sort ? this.activeParamsUserQuestion.sort === sortingOption.value : false"
+                 (click)="sort(sortingOption.value, null, sorting.sortingDisplay)"
+                 *ngFor="let sortingOption of sortingOptions">{{sortingOption.name}}</div>
+            <div class="catalog-sorting-item"
+                 [class.active]="this.activeParamsUserQuestion.order ? this.activeParamsUserQuestion.order === orderOption.value : false"
+                 (click)="sort(null, orderOption.value, sorting.sortingDisplay)"
+                 *ngFor="let orderOption of orderOptions">{{orderOption.name}}</div>
+          </div>
+
+        </div>
+        <button class="block-close-display">
+          <svg (click)="closeDisplay()" class="close-display" version="1.1" id="Layer_1"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+               viewBox="0 0 492 492" style="enable-background:new 0 0 492 492;" xml:space="preserve">
+          <g>
+            <g>
+              <path d="M300.188,246L484.14,62.04c5.06-5.064,7.852-11.82,7.86-19.024c0-7.208-2.792-13.972-7.86-19.028L468.02,7.872
+                c-5.068-5.076-11.824-7.856-19.036-7.856c-7.2,0-13.956,2.78-19.024,7.856L246.008,191.82L62.048,7.872
+                c-5.06-5.076-11.82-7.856-19.028-7.856c-7.2,0-13.96,2.78-19.02,7.856L7.872,23.988c-10.496,10.496-10.496,27.568,0,38.052
+                L191.828,246L7.872,429.952c-5.064,5.072-7.852,11.828-7.852,19.032c0,7.204,2.788,13.96,7.852,19.028l16.124,16.116
+                c5.06,5.072,11.824,7.856,19.02,7.856c7.208,0,13.968-2.784,19.028-7.856l183.96-183.952l183.952,183.952
+                c5.068,5.072,11.824,7.856,19.024,7.856h0.008c7.204,0,13.96-2.784,19.028-7.856l16.12-16.116
+                c5.06-5.064,7.852-11.824,7.852-19.028c0-7.204-2.792-13.96-7.852-19.028L300.188,246z"/>
+            </g>
+          </g>
+          </svg>
+        </button>
+      </div>
+
+      <table>
+        <tr>
+          <th class="table-title">Автор вопроса</th>
+          <th class="table-title">Тема</th>
+          <th class="table-title">Количество ответов</th>
+          <th class="table-title">Теги</th>
+        </tr>
+        <tr *ngFor="let userQuestion of userQuestions">
+          <td class="table-title"><a>{{userQuestion.owner.display_name}}</a></td>
+          <td class="table-title"><a>{{userQuestion.title}}</a></td>
+          <td class="table-title"><a>{{userQuestion.answer_count}}</a></td>
+          <td class="table-title tags">
+            <span class="tag" *ngFor="let tag of userQuestion.tags"><a>{{tag}}</a></span>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="wrapper" *ngIf="loading">
+  <div class="loader" >
+    <div class="loader-line1"></div>
+    <div class="loader-line2"></div>
+    <div class="loader-line3"></div>
+    <div class="loader-line4"></div>
+    <div class="loader-line5"></div>
+    <div class="loader-line6"></div>
+    <div class="loader-line7"></div>
+    <div class="loader-line8"></div>
+  </div>
+</div>

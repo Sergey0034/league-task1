@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="question">
+    <div class="question-header">
+      <div class="question-title">{{question}}</div>
+      <button class="btn" (click)="backSearchResult()">Вернуться к результатам поиска</button>
+    </div>
+    <div class="question-body" [innerHTML]="questionBody"></div>
+  </div>
+  <div class="answer-title">
+    Ответы:
+  </div>
+  <div class="answers">
+    <div class="answer" *ngFor="let answer of answersGet" [innerHTML]="answer.body"></div>
+  </div>
+</div>
+
